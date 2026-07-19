@@ -6,7 +6,10 @@ import AlertsPanel from './components/AlertsPanel.jsx';
 import VehicleList from './components/VehicleList.jsx';
 import StatsStrip from './components/StatsStrip.jsx';
 import FooterBar from './components/FooterBar.jsx';
-
+import VehicleDetailModal from './components/VehicleDetailModal.jsx';
+import AlertDetailModal from './components/AlertDetailModal.jsx';
+import ReportsView from './components/ReportsView.jsx';
+import SettingsView from './components/SettingsView.jsx';
 import { socket, API_URL } from './socket.js';
 import { decodeBinaryBatch } from './utils/decodeBinary.js';
 import { haversineKm } from './utils/geo.js';
@@ -18,8 +21,9 @@ export default function App() {
   const [vehicles, setVehicles] = useState({}); // vehicleId -> point+status
   const [alerts, setAlerts] = useState([]);
   const [connected, setConnected] = useState(socket.connected);
-  const [activeNav, setActiveNav] = useState('map');
-
+ const [activeNav, setActiveNav] = useState('map');
+const [selectedVehicle, setSelectedVehicle] = useState(null);
+const [selectedAlert, setSelectedAlert] = useState(null);
   const registryRef = useRef(new Map()); // numericId -> vehicleId
   const distanceRef = useRef(0); // accumulated km, demo "distance today"
   const mountTimeRef = useRef(Date.now());
